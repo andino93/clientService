@@ -1,0 +1,29 @@
+{
+  "name": "thesis",
+  "version": "1.0.0",
+  "description": "client service for AirBnB microservice",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andino93/clientService.git"
+  },
+  "keywords": [
+    "airbnb"
+  ],
+  "author": "Andrew Nguyen",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/andino93/clientService/issues"
+  },
+  "homepage": "https://github.com/andino93/clientService#readme",
+  "dependencies": {
+    "babel-cli": "^6.26.0",
+    "chai": "^4.1.2",
+    "express": "^4.16.2",
+    "mocha": "^4.0.1",
+    "nodejs": "0.0.0"
+  }
+}
