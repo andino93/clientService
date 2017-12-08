@@ -21,7 +21,10 @@
   "homepage": "https://github.com/andino93/clientService#readme",
   "dependencies": {
     "babel-cli": "^6.26.0",
+    "babel-preset-airbnb": "^2.4.0",
     "chai": "^4.1.2",
+    "eslint": "^4.12.1",
+    "eslint-config-airbnb": "^16.1.0",
     "express": "^4.16.2",
     "mocha": "^4.0.1",
     "nodejs": "0.0.0",
