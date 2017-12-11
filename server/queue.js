@@ -14,13 +14,28 @@ AWS.config.update(params);
 const sqs = new AWS.SQS();
 sqs.sendMessage = Promise.promisify(sqs.sendMessage);
 sqs.receiveMessage = Promise.promisify(sqs.receiveMessage);
+sqs.deleteMessage = Promise.promisify(sqs.deleteMessage);
+sqs.deleteMessageBatch = Promise.promisify(sqs.deleteMessageBatch);
 
 const postMessage = (MessageBody, QueueUrl) => (
   sqs.sendMessage({ MessageBody, QueueUrl })
 );
 
-const getMessages = () => (
-  sqs.receiveMessage({ MaxNumberOfMessages: 10, QueueUrl: process.env.AWS_THESIS_URL })
+const getMessages = (queueURL = process.env.AWS_CLIENT_URL) => (
+  sqs.receiveMessage({ MaxNumberOfMessages: 10, QueueUrl: queueURL })
 );
 
-export { getMessages, postMessage };
+// const deleteMessages = (Messages, QueueUrl = process.env.AWS_CLIENT_URL) => (
+//   Promise.map(Messages, ({ ReceiptHandle }) => sqs.deleteMessage({ ReceiptHandle, QueueUrl }))
+// );
+
+const formatDelete = array => array.map(({ MessageId, ReceiptHandle }) => (
+  { Id: MessageId, ReceiptHandle }
+));
+
+const deleteMessages = (Messages, QueueUrl = process.env.AWS_CLIENT_URL) => {
+  const Entries = formatDelete(Messages);
+  return sqs.deleteMessageBatch({ Entries, QueueUrl });
+};
+
+export { getMessages, postMessage, deleteMessages };
