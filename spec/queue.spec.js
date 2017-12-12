@@ -1,12 +1,12 @@
 import { expect, assert } from 'chai';
 import { config } from 'dotenv';
 import Promise from 'bluebird';
-import { getMessages, postMessage, deleteMessages } from '../server/queue';
+import { getMessages, postMessage, deleteMessages, sqs } from '../server/queue';
 
 config();
 describe('AWS Queue', () => {
-  const testQueue = process.env.AWS_TESTQ_URL
   let messages;
+  const testQueue = process.env.AWS_TESTQ_URL
 
   describe('post messages to queue', () => {
     it('expect postMessage to exist', () => {
@@ -24,12 +24,8 @@ describe('AWS Queue', () => {
   });
 
   describe('retrieve and delete messages from queue', () => {
-    // TODO: write test for multiple inserts and deletes 
-    // before((done) => {
-    //   const messages = ['hello', 'this', 'is', 'a', 'test', 'batch']
-    //   Promise.map(messages, message => postMessage(message, testQueue))
-    //     .then(() => done());
-    // })
+    // TODO: write test for multiple inserts and deletes
+    const messages = ['hello', 'this', 'is', 'a', 'test', 'batch']
 
     it('expect getMessages to exist', () => {
       expect(getMessages).to.exist
@@ -44,7 +40,6 @@ describe('AWS Queue', () => {
         .tap(({ Messages }) => expect(Messages).to.be.an('array'))
         .tap(({ Messages }) => expect(Messages[0]).to.be.an('object'))
         .tap(({ Messages }) => expect(Messages[0]).to.have.property('Body'))
-        .tap(({ Messages }) => messages = Messages)
         .then(({ Messages }) => deleteMessages(Messages, testQueue))
         .tap(res => expect(res).to.have.property('Successful'))
         .tap(res => expect(res.Successful).to.be.an('array'))
@@ -57,5 +52,30 @@ describe('AWS Queue', () => {
         .then(response => expect(response.Messages).to.be.undefined)
         .then(() => done())
     });
+    it('should add mutiple messages to queue', (done) => {
+      Promise.map(messages, message => postMessage(message, testQueue))
+        .then(() => done())
+        .catch(err => done(err))
+    });
+    it('should retrieve a batch of messages and then delete from queue', (done) => {
+      getMessages(testQueue)
+      .tap(response => expect(response).to.be.an('object'))
+      .tap(response => expect(response).to.have.property('Messages'))
+      .tap(({ Messages }) => expect(Messages).to.be.an('array'))
+      .tap(({ Messages }) => expect(...Messages).to.be.an('object'))
+      .tap(({ Messages }) => expect(...Messages).to.have.property('Body'))
+      .tap(({ Messages }) => {
+        const isMatch = Messages.every(message => messages.includes(message.Body))
+        expect(isMatch).to.be.true;
+      })
+      .then(({ Messages }) => deleteMessages(Messages, testQueue))
+      .tap(res => expect(res).to.have.property('Successful'))
+      .tap(res => expect(res.Successful).to.be.an('array'))
+      .tap(({ Successful }) => expect(...Successful).to.have.property('Id'))
+      .then(() => done())
+      .catch(err => done(err));
+    })
   });
+
+  // after(done => sqs.purgeQueue({ QueueUrl: testQueue }))
 });

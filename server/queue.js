@@ -14,8 +14,8 @@ AWS.config.update(params);
 const sqs = new AWS.SQS();
 sqs.sendMessage = Promise.promisify(sqs.sendMessage);
 sqs.receiveMessage = Promise.promisify(sqs.receiveMessage);
-sqs.deleteMessage = Promise.promisify(sqs.deleteMessage);
 sqs.deleteMessageBatch = Promise.promisify(sqs.deleteMessageBatch);
+sqs.purgeQueue = Promise.promisify(sqs.purgeQueue);
 
 const postMessage = (MessageBody, QueueUrl) => (
   sqs.sendMessage({ MessageBody, QueueUrl })
@@ -24,10 +24,6 @@ const postMessage = (MessageBody, QueueUrl) => (
 const getMessages = (queueURL = process.env.AWS_CLIENT_URL) => (
   sqs.receiveMessage({ MaxNumberOfMessages: 10, QueueUrl: queueURL })
 );
-
-// const deleteMessages = (Messages, QueueUrl = process.env.AWS_CLIENT_URL) => (
-//   Promise.map(Messages, ({ ReceiptHandle }) => sqs.deleteMessage({ ReceiptHandle, QueueUrl }))
-// );
 
 const formatDelete = array => array.map(({ MessageId, ReceiptHandle }) => (
   { Id: MessageId, ReceiptHandle }
@@ -38,4 +34,4 @@ const deleteMessages = (Messages, QueueUrl = process.env.AWS_CLIENT_URL) => {
   return sqs.deleteMessageBatch({ Entries, QueueUrl });
 };
 
-export { getMessages, postMessage, deleteMessages };
+export { getMessages, postMessage, deleteMessages, sqs };
