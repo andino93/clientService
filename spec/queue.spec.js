@@ -1,10 +1,12 @@
 import { expect, assert } from 'chai';
 import { config } from 'dotenv';
+import Promise from 'bluebird';
 import { getMessages, postMessage, deleteMessages } from '../server/queue';
 
 config();
 describe('AWS Queue', () => {
   const testQueue = process.env.AWS_TESTQ_URL
+  let messages;
 
   describe('post messages to queue', () => {
     it('expect postMessage to exist', () => {
@@ -21,39 +23,39 @@ describe('AWS Queue', () => {
     });
   });
 
-  describe('retrieve message from queue', () => {
+  describe('retrieve and delete messages from queue', () => {
+    // TODO: write test for multiple inserts and deletes 
+    // before((done) => {
+    //   const messages = ['hello', 'this', 'is', 'a', 'test', 'batch']
+    //   Promise.map(messages, message => postMessage(message, testQueue))
+    //     .then(() => done());
+    // })
+
     it('expect getMessages to exist', () => {
       expect(getMessages).to.exist
     });
-    it('should retrieve from queue', (done) => {
+    it('expect deleteMessages to exist', () => {
+      expect(deleteMessages).to.exist
+    });
+    it('should retrieve and delete from queue', (done) => {
       getMessages(testQueue)
         .tap(response => expect(response).to.be.an('object'))
         .tap(response => expect(response).to.have.property('Messages'))
         .tap(({ Messages }) => expect(Messages).to.be.an('array'))
         .tap(({ Messages }) => expect(Messages[0]).to.be.an('object'))
         .tap(({ Messages }) => expect(Messages[0]).to.have.property('Body'))
-        .then(() => done())
-        .catch(err => done(err));
-    });
-  });
-
-  describe('should delete messages from queue', () => {
-    let messages;
-    before(done => {
-      getMessages(testQueue)
         .tap(({ Messages }) => messages = Messages)
-        .then(() => done())
-        .catch(err => done(err));
-    });
-    it('expect deleteMessages to exist', () => {
-      expect(deleteMessages).to.exist
-    });
-    it('should delete messages from queue', (done) => {
-      deleteMessages(messages, testQueue)
+        .then(({ Messages }) => deleteMessages(Messages, testQueue))
         .tap(res => expect(res).to.have.property('Successful'))
         .tap(res => expect(res.Successful).to.be.an('array'))
-        .tap(res => expect(res.Successful[0]).to.have.property('Id'))
-        .then(() => done());
-    })
+        .tap(({ Successful }) => expect(...Successful).to.have.property('Id'))
+        .then(() => done())
+        .catch(err => done(err));
+    });
+    it('should not retrieve messages from queue after delete', (done) => {
+      getMessages(testQueue)
+        .then(response => expect(response.Messages).to.be.undefined)
+        .then(() => done())
+    });
   });
 });
