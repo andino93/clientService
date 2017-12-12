@@ -76,6 +76,4 @@ describe('AWS Queue', () => {
       .catch(err => done(err));
     })
   });
-
-  // after(done => sqs.purgeQueue({ QueueUrl: testQueue }))
 });
