@@ -24,7 +24,6 @@ describe('AWS Queue', () => {
   });
 
   describe('retrieve and delete messages from queue', () => {
-    // TODO: write test for multiple inserts and deletes
     const messages = ['hello', 'this', 'is', 'a', 'test', 'batch']
 
     it('expect getMessages to exist', () => {
