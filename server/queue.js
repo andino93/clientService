@@ -34,4 +34,4 @@ const deleteMessages = (Messages, QueueUrl = process.env.AWS_CLIENT_URL) => {
   return sqs.deleteMessageBatch({ Entries, QueueUrl });
 };
 
-export { getMessages, postMessage, deleteMessages, sqs };
+export { getMessages, postMessage, deleteMessages };
