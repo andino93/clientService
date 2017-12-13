@@ -25,4 +25,18 @@ const deleteEntry = (index, type, id) => (
   search.delete({ index, type, id })
 );
 
-export { addNewEntry, deleteEntry };
+const searchIt = (index, type, key, param) => (
+  search.search({
+    index,
+    type,
+    body: {
+      query: {
+        match: {
+          [key]: param,
+        },
+      },
+    },
+  })
+);
+
+export { addNewEntry, deleteEntry, searchIt };
