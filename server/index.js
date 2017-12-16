@@ -3,7 +3,7 @@ import { config } from 'dotenv';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import { addNewEntry, deleteEntry, searchIt } from '../database/index';
-import addExperience from './showExperience';
+import addExperience from './addExperience';
 
 config();
 const app = express();
@@ -21,8 +21,8 @@ app.get('/rentals?:location', (req, res) => {
   showExperience = showExperience || Math.random() > 0.5;
   location = location.replace(', ', '_');
   searchIt('rental', location)
-    .tap(query => addExperience(query, true, location))
-    .then(query => res.send(query))
+    .then(query => addExperience(query, showExperience, location))
+    .then(result => res.send(result))
     .catch(err => res.send(err));
 });
 
