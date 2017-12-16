@@ -3,39 +3,40 @@ import elasticsearch from 'elasticsearch';
 import Promise from 'bluebird';
 
 config();
-const search = new elasticsearch.Client({
+
+const client = new elasticsearch.Client({
   hosts: process.env.ELASTIC,
+  index: 'rentals',
   defer: () => Promise.defer(),
 });
 
-search.ping({ requestTimeout: 30000 })
-  .then(() => console.log('elasticity!'))
+client.ping({ requestTimeout: 30000 })
+  .then(res => console.log('elasticity!', res))
   .catch(err => console.error(err));
 
-const addNewEntry = (location, type, id, body) => (
-  search.index({
-    index: location,
-    type,
-    id,
+const addNewEntry = (location, index, body) => (
+  client.index({
+    index,
+    type: location,
     body,
   })
 );
 
 const deleteEntry = (index, type, id) => (
-  search.delete({ index, type, id })
+  client.delete({ index, type, id })
 );
 
 const searchIt = (index, type, key, param) => (
-  search.search({
+  client.search({
     index,
     type,
-    body: {
-      query: {
-        match: {
-          [key]: param,
-        },
-      },
-    },
+    // body: {
+    //   query: {
+    //     match: {
+    //       [key]: param,
+    //     },
+    //   },
+    // },
   })
 );
 

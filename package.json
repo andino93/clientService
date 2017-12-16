@@ -24,11 +24,14 @@
   "homepage": "https://github.com/andino93/clientService#readme",
   "dependencies": {
     "aws-sdk": "^2.167.0",
+    "aws-sqs-consumer": "^2.0.1",
     "axios": "^0.17.1",
     "bluebird": "^3.5.1",
+    "body-parser": "^1.18.2",
     "cors": "^2.8.4",
     "dotenv": "^4.0.0",
     "elasticsearch": "^14.0.0",
+    "elasticsearch-odm": "^1.1.0",
     "express": "^4.16.2",
     "nodejs": "0.0.0"
   },
