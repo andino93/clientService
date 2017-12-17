@@ -20,7 +20,7 @@ app.get('/rentals?:location', (req, res) => {
   let { location, showExperience } = req.query;
   showExperience = showExperience || Math.random() > 0.5;
   location = location.replace(', ', '_');
-  searchIt('rental', location)
+  searchIt('homes', 'city', location)
     .then(query => addExperience(query, showExperience, location))
     .then(result => res.send(result))
     .catch(err => res.send(err));
