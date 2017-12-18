@@ -7,7 +7,8 @@
     "server-dev": "nodemon --exec babel-node -- server/index.js",
     "test-server": "mocha -R spec --compilers js:babel-register spec/server.spec.js",
     "test-db": "mocha -R spec --compilers js:babel-register spec/database.spec.js",
-    "test-queue": "mocha -R spec --compilers js:babel-register spec/queue.spec.js"
+    "test-queue": "mocha -R spec --compilers js:babel-register spec/queue.spec.js",
+    "seedData": "babel-node database/seedSampleData.js"
   },
   "repository": {
     "type": "git",
