@@ -1,6 +1,7 @@
 import { config } from 'dotenv';
 import elasticsearch from 'elasticsearch';
 import Promise from 'bluebird';
+import uuid from 'uuid/v4';
 
 config();
 
@@ -18,6 +19,7 @@ const addNewEntry = (location, index, body, type) => (
   client.index({
     index,
     type,
+    id: uuid(),
     body,
   })
 );
