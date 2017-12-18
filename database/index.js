@@ -17,7 +17,7 @@ client.ping({ requestTimeout: 30000 })
 const addNewEntry = (location, index, body, type) => (
   client.index({
     index,
-    type: index,
+    type,
     body,
   })
 );
@@ -26,14 +26,14 @@ const deleteEntry = (index, type, id) => (
   client.delete({ index, type, id })
 );
 
-const searchIt = (index, key, param) => (
+const searchIt = (index, type, query, key = 'city') => (
   client.search({
     index,
-    type: 'room',
+    type,
     body: {
       query: {
         match: {
-          [key]: param,
+          [key]: query,
         },
       },
     },
