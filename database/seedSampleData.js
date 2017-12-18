@@ -50,9 +50,6 @@ const populateHomes = (quantity) => {
       .then(response => console.log('success', response)) // eslint-disable-line
       .catch(err => console.error('errr', err)); // eslint-disable-line
   }
-  // Promise.map(homes, home => addNewEntry(home.city, 'homes', home))
-  //   .then(response => console.log('success', response)) // eslint-disable-line
-  //   .catch(err => console.error('errr', err)); // eslint-disable-line
 };
 
 populateHomes(1000);
@@ -70,11 +67,10 @@ const populateExperiences = (quantity) => {
       experienceId: uuid(),
       guestCount: randomNumber(1, 20),
     };
-    experiences.push(experience);
+    addNewEntry(experience.city, 'experiences', experience)
+      .then(response => console.log('success', response)) // eslint-disable-line
+      .catch(err => console.error('errr', err)); // eslint-disable-line
   }
-  Promise.map(experiences, experience => addNewEntry(experience.city, 'experiences', experience))
-    .then(response => console.log('success', response)) // eslint-disable-line
-    .catch(err => console.error('errr', err)); // eslint-disable-line
 };
 
-// populateExperiences(1000);
+populateExperiences(1000);

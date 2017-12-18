@@ -14,10 +14,10 @@ client.ping({ requestTimeout: 30000 })
   .then(res => console.log('elasticity!', res))
   .catch(err => console.error(err));
 
-const addNewEntry = (location, index, body) => (
+const addNewEntry = (location, index, body, type) => (
   client.index({
     index,
-    type: 'room',
+    type: index,
     body,
   })
 );
