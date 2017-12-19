@@ -2,7 +2,7 @@ import express from 'express';
 import { config } from 'dotenv';
 import cors from 'cors';
 import bodyParser from 'body-parser';
-import { addNewEntry, deleteEntry, searchIt } from '../database/index';
+import { addNewEntry, searchIt } from '../database/index';
 import addExperience from './addExperience';
 
 config();
@@ -17,7 +17,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/rentals?:location', (req, res) => {
   // TODO: remove res.send result/err after testing is done
-  let { location, showExperience } = req.query; // eslint-disable-line 
+  let { location, showExperience } = req.query; // eslint-disable-line
   showExperience = showExperience || Math.random() > 0.5;
   searchIt('homes', 'home', location)
     .then(query => addExperience(query, showExperience, location))
@@ -28,8 +28,7 @@ app.get('/rentals?:location', (req, res) => {
 app.post('/rentals', (req, res) => {
   // TODO: remove res.send result/err after testing is done
   const { location, index, body } = req.body;
-  const qLocation = location.replace(', ', '_');
-  addNewEntry(qLocation, index, body)
+  addNewEntry(location, index, body)
     .then(result => res.send(result))
     .catch(err => res.send(err));
 });
