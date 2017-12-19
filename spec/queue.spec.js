@@ -1,7 +1,7 @@
 import { expect, assert } from 'chai';
 import { config } from 'dotenv';
 import Promise from 'bluebird';
-import { getMessages, postMessage, deleteMessages } from '../server/queue';
+import { getMessages, postMessage, deleteMessages } from '../queue/queue';
 
 config();
 describe('AWS Queue', () => {
