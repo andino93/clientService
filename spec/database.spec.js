@@ -5,7 +5,7 @@ import { addNewEntry, deleteEntry, searchIt } from '../database/index';
 import { makeSampleData } from '../database/seedSampleData';
 
 describe('Database should do things', () => {
-  const samples = makeSampleData(5, 'homes', 'home', 'homeId');
+  const samples = makeSampleData(1, 'homes', 'home', 'homeId');
 
   describe('should add new entries to database', () => {
     it('addNewEntry should exist', () => {
@@ -17,7 +17,6 @@ describe('Database should do things', () => {
     it('should add a new entry to database then delete it', (done) => {
       addNewEntry(samples[1].city, samples[0].index._index, samples[1], samples[0].index._type)
         .tap(success => expect(success.result).to.equal('created'))
-        .tap(success => console.log('asdfasdfsadf', success))
         .then(success => deleteEntry(success._index, success._type, success._id))
         .tap(response => expect(response.result).to.equal('deleted'))
         .then(() => done())
