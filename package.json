@@ -7,7 +7,8 @@
     "server-dev": "nodemon --exec babel-node -- server/index.js",
     "test-server": "mocha -R spec --compilers js:babel-register spec/server.spec.js",
     "test-db": "mocha -R spec --compilers js:babel-register spec/database.spec.js",
-    "test-queue": "mocha -R spec --compilers js:babel-register spec/queue.spec.js"
+    "test-queue": "mocha -R spec --compilers js:babel-register spec/queue.spec.js",
+    "seedData": "babel-node database/seedSampleData.js"
   },
   "repository": {
     "type": "git",
@@ -24,12 +25,19 @@
   "homepage": "https://github.com/andino93/clientService#readme",
   "dependencies": {
     "aws-sdk": "^2.167.0",
+    "aws-sqs-consumer": "^2.0.1",
     "axios": "^0.17.1",
     "bluebird": "^3.5.1",
+    "body-parser": "^1.18.2",
     "cors": "^2.8.4",
     "dotenv": "^4.0.0",
+    "elasticsearch": "^14.0.0",
+    "elasticsearch-odm": "^1.1.0",
     "express": "^4.16.2",
-    "nodejs": "0.0.0"
+    "faker": "^4.1.0",
+    "lodash": "^4.17.4",
+    "nodejs": "0.0.0",
+    "uuid": "^3.1.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
