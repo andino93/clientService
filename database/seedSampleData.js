@@ -44,7 +44,8 @@ const populateHomes = (quantity) => {
     homes.push(home);
   }
   bulkInsert({ body: homes })
-    .then(console.log(`inserted ${quantity} homes`));
+    .then(success => console.log(`inserted ${quantity} homes ${success}`))
+    .catch(err => console.error(`error on homes ${err}`));
 };
 
 populateHomes(10000);
@@ -67,7 +68,8 @@ const populateExperiences = (quantity) => {
     experiences.push(experience);
   }
   bulkInsert({ body: experiences })
-    .then(console.log(`inserted ${quantity} experiences`));
+    .then(success => console.log(`inserted ${quantity} experiences ${success}`))
+    .catch(err => console.error(`error on exp ${err}`));
 };
 
 populateExperiences(10000);
