@@ -32,11 +32,11 @@
     "cors": "^2.8.4",
     "dotenv": "^4.0.0",
     "elasticsearch": "^14.0.0",
-    "elasticsearch-odm": "^1.1.0",
     "express": "^4.16.2",
     "faker": "^4.1.0",
     "lodash": "^4.17.4",
     "nodejs": "0.0.0",
+    "sqs-consumer": "^3.8.0",
     "uuid": "^3.1.0"
   },
   "devDependencies": {

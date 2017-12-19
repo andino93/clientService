@@ -34,6 +34,7 @@ describe('AWS Queue', () => {
     });
     it('should retrieve and delete from queue', (done) => {
       getMessages(testQueue)
+        .tap(resp => console.log(resp))
         .tap(response => expect(response).to.be.an('object'))
         .tap(response => expect(response).to.have.property('Messages'))
         .tap(({ Messages }) => expect(Messages).to.be.an('array'))
