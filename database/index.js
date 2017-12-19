@@ -24,6 +24,10 @@ const addNewEntry = (location, index, body, type) => (
   })
 );
 
+const bulkInsert = params => (
+  client.bulk(params)
+)
+
 const deleteEntry = (index, type, id) => (
   client.delete({ index, type, id })
 );
@@ -42,4 +46,4 @@ const searchIt = (index, type, query, key = 'city') => (
   })
 );
 
-export { addNewEntry, deleteEntry, searchIt };
+export { addNewEntry, deleteEntry, searchIt, bulkInsert };
