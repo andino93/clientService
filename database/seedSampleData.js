@@ -1,7 +1,7 @@
 import faker from 'faker';
 import _ from 'lodash';
 import uuid from 'uuid/v4';
-import { addNewEntry, bulkInsert } from './index';
+import { bulkInsert } from './index';
 import { cities, neighborhoods } from '../sampleNames';
 
 const getPrice = () => Math.floor(40 + (Math.random() * 150));
@@ -25,51 +25,40 @@ const fakeDates = () => {
 };
 
 // TODO: To Reservations needs guest count
-
-const populateHomes = (quantity) => {
-  const homes = [];
-  for (let i = 1; i <= quantity; i += 1) {
-    const home = {
+const makeSampleData = (quantity, index, type, idType) => {
+  const datas = [];
+  for (let i = 0; i < quantity; i += 1) {
+    const data = {
       title: faker.fake('{{random.words}}'),
       description: faker.fake('{{lorem.sentences}}'),
       datesAvailable: fakeDates(),
       city: cities[randomNumber(0, cities.length - 1)],
       suburb: neighborhoods[randomNumber(0, neighborhoods.length - 1)],
       price: getPrice(),
-      homeId: uuid(),
+      [idType]: uuid(),
       guestCount: randomNumber(1, 6),
     };
-    const indexInfo = { index: { _index: 'homes', _type: 'home', _id: uuid() } };
-    homes.push(indexInfo);
-    homes.push(home);
+    const indexInfo = { index: { _index: index, _type: type, _id: uuid() } };
+    datas.push(indexInfo);
+    datas.push(data);
   }
-  bulkInsert({ body: homes })
+  return datas;
+};
+
+const populateHomes = (quantity) => {
+  bulkInsert({ body: makeSampleData(quantity, 'homes', 'home', 'homeId') })
     .then(success => console.log(`inserted ${quantity} homes ${success}`))
     .catch(err => console.error(`error on homes ${err}`));
 };
 
-populateHomes(10000);
+// populateHomes(10000);
 
 const populateExperiences = (quantity) => {
-  const experiences = [];
-  for (let i = 1; i <= quantity; i += 1) {
-    const experience = {
-      title: faker.fake('{{random.words}}'),
-      description: faker.fake('{{lorem.sentences}}'),
-      datesAvailable: fakeDates(),
-      city: cities[randomNumber(0, cities.length - 1)],
-      suburb: neighborhoods[randomNumber(0, neighborhoods.length - 1)],
-      price: getPrice(),
-      experienceId: uuid(),
-      guestCount: randomNumber(1, 20),
-    };
-    const indexInfo = { index: { _index: 'experiences', _type: 'experience', _id: uuid() } };
-    experiences.push(indexInfo);
-    experiences.push(experience);
-  }
-  bulkInsert({ body: experiences })
+  bulkInsert({ body: makeSampleData(quantity, 'experiences', 'experience', 'experienceId') })
     .then(success => console.log(`inserted ${quantity} experiences ${success}`))
     .catch(err => console.error(`error on exp ${err}`));
 };
 
-populateExperiences(10000);
+// populateExperiences(10000);
+
+export { populateHomes, populateExperiences, makeSampleData };
