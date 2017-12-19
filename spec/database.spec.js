@@ -28,5 +28,15 @@ describe('Database should do things', () => {
     it('searchIt should exist', () => {
       expect(searchIt).to.exist;
     });
+    it('should retrieve results with city Chicago', (done) => {
+      searchIt('homes', 'home', 'Chicago')
+        .tap(results => expect(results).to.have.property('hits'))
+        .tap(results => expect(results).to.have.property('_shards'))
+        .tap(results => expect(results.hits.hits[0]).to.have.property('_source'))
+        .tap(results => expect(results.hits.hits[0]._source).to.have.property('city'))
+        .tap(results => expect(results.hits.hits[0]._source.city).to.equal('Chicago'))
+        .then(() => done())
+        .catch(err => done(err));
+    });
   });
 });
