@@ -2,7 +2,7 @@ import express from 'express';
 import { config } from 'dotenv';
 import cors from 'cors';
 import bodyParser from 'body-parser';
-import { addNewEntry, searchIt } from '../database/index';
+import { searchIt } from '../database/index';
 import addExperience from '../helpers/addExperience';
 
 config();
@@ -26,6 +26,6 @@ app.get('/rentals?:location', (req, res) => {
 });
 
 app.post('/reservations', (req, res) => {
-  // TODO: should package up
+  // TODO: should package up booking info and send to reservation service
 
 });
