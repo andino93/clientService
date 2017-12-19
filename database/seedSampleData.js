@@ -1,6 +1,5 @@
 import faker from 'faker';
 import _ from 'lodash';
-import Promise from 'bluebird';
 import uuid from 'uuid/v4';
 import { addNewEntry } from './index';
 import { cities, neighborhoods } from '../sampleNames';

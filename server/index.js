@@ -17,10 +17,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/rentals?:location', (req, res) => {
   // TODO: remove res.send result/err after testing is done
-  let { location, showExperience } = req.query;
+  let { location, showExperience } = req.query; // eslint-disable-line 
   showExperience = showExperience || Math.random() > 0.5;
-  location = location.replace(', ', '_');
-  searchIt('homes', 'city', location)
+  searchIt('homes', 'home', location)
     .then(query => addExperience(query, showExperience, location))
     .then(result => res.send(result))
     .catch(err => res.send(err));
