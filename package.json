@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "server-dev": "nodemon --exec babel-node -- server/index.js",
+    "reservations": "nodemon --exec babel-node -- reservations/server.js",
     "test-server": "mocha -R spec --compilers js:babel-register spec/server.spec.js",
     "test-db": "mocha -R spec --compilers js:babel-register spec/database.spec.js",
     "test-queue": "mocha -R spec --compilers js:babel-register spec/queue.spec.js",
