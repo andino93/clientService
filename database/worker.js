@@ -39,6 +39,9 @@ const queue = Consumer.create({
   },
 });
 
+// TODO: remove console messages in favor of log file
 queue.on('error', err => console.error('queue error: ', err.message));
+queue.on('stopped', () => console.log('done comsuming noms'));
+queue.on('empty', () => console.log('feed me more noms!'));
 
 queue.start();

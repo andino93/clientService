@@ -27,5 +27,6 @@ app.get('/rentals?:location', (req, res) => {
 
 app.post('/reservations', (req, res) => {
   // TODO: should package up booking info and send to reservation service
-
+  console.log(req.body);
+  res.end();
 });
