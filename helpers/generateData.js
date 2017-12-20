@@ -1,7 +1,7 @@
 import faker from 'faker';
 import _ from 'lodash';
 import uuid from 'uuid/v4';
-import { bulkInsert } from './index';
+import { bulkInsert } from '../database/index';
 import { cities, neighborhoods } from '../sampleNames';
 
 const getPrice = () => Math.floor(40 + (Math.random() * 150));

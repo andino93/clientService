@@ -35,9 +35,4 @@ const deleteMessages = (Messages, QueueUrl = process.env.AWS_CLIENT_URL) => {
   return sqs.deleteMessageBatch({ Entries, QueueUrl });
 };
 
-
-// const messages = [{ hello: 'test', one: 'yes' }, 'this', 'is', 'a', 'test', 'batch'];
-// Promise.map(messages, message => postMessage(message, process.env.AWS_TESTQ_URL))
-//   .then(mess => console.log('post ', mess))
-//   .catch(err => console.error('err in post', err));
 export { getMessages, postMessage, deleteMessages };
