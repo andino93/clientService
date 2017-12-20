@@ -33,7 +33,6 @@ const queue = Consumer.create({
     // insert or update entry
     const listing = JSON.parse(message.Body);
     addNewEntry(listing.city, listing.type, listing, listing.type.slice(0, -1))
-      .tap(resp => console.log(resp))
       .then(() => done())
       .catch(err => done(err));
   },
