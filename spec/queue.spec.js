@@ -24,7 +24,7 @@ describe('AWS Queue', () => {
   });
 
   describe('retrieve and delete messages from queue', () => {
-    const messages = [JSON.stringify({hello: 'test', one: 'yes'}), 'this', 'is', 'a', 'test', 'batch']
+    const messages = [{hello: 'test', one: 'yes'}, 'this', 'is', 'a', 'test', 'batch']
 
     it('expect getMessages to exist', () => {
       expect(getMessages).to.exist

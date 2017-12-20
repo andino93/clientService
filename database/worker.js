@@ -3,14 +3,15 @@ import express from 'express';
 import { config } from 'dotenv';
 import Consumer from 'sqs-consumer';
 import aws from 'aws-sdk';
-import Promise from 'bluebird';
 import { addNewEntry, deleteEntry, searchIt, bulkInsert } from './index';
-// import { getMessages, postMessage, deleteMessages } from '../queue/queue';
 
 config();
 
 const app = express();
 const port = process.env.PORT2;
+let queueUrl = process.env.AWS_TESTQ_URL;
+if (process.env.NODE_ENV !== 'development') queueUrl = process.env.AWS_CLIENT_URL;
+
 app.listen(port, () => console.log(`db worker be listenin' on ${port}`));
 
 const params = {
@@ -18,10 +19,11 @@ const params = {
   secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
   region: process.env.AWS_DEFAULT_REGION,
 };
+
 aws.config.update(params);
 
 const queue = Consumer.create({
-  queueUrl: process.env.AWS_CLIENT_URL,
+  queueUrl,
   batchSize: 10,
   visibilityTimeout: 20,
   terminateVisibilityTimeout: true,
@@ -29,8 +31,11 @@ const queue = Consumer.create({
   sqs: new aws.SQS(),
   handleMessage: (message, done) => {
     // insert or update entry
-    console.log('handle message: ', message);
-    done();
+    const listing = JSON.parse(message.Body);
+    addNewEntry(listing.city, listing.type, listing, listing.type.slice(0, -1))
+      .tap(resp => console.log(resp))
+      .then(() => done())
+      .catch(err => done(err));
   },
 });
 

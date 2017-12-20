@@ -25,7 +25,7 @@ const fakeDates = () => {
 };
 
 // TODO: To Reservations needs guest count
-const makeSampleData = (quantity, index, type, idType) => {
+const makeSampleData = (quantity, index, type, idType, setInfo = true) => {
   const datas = [];
   for (let i = 0; i < quantity; i += 1) {
     const data = {
@@ -38,8 +38,11 @@ const makeSampleData = (quantity, index, type, idType) => {
       [idType]: uuid(),
       guestCount: randomNumber(1, 6),
     };
-    const indexInfo = { index: { _index: index, _type: type, _id: uuid() } };
-    datas.push(indexInfo);
+    let indexInfo;
+    if (setInfo) {
+      indexInfo = { index: { _index: index, _type: type, _id: uuid() } };
+      datas.push(indexInfo);
+    }
     datas.push(data);
   }
   return datas;
