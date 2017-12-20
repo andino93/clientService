@@ -46,10 +46,4 @@ const searchIt = (index, type, query, key = 'city') => (
   })
 );
 
-// deleteEntry('homes', 'home', '0c2d479e-ba1a-4118-8a70-ed48028d446d')
-// deleteEntry('homes', 'home', 'df202bbc-980b-42c7-86b0-92c846ed2e48')
-// deleteEntry('homes', 'home', '14c33305-d274-4b52-a5f9-cce75d7582c3')
-// deleteEntry('homes', 'home', 'c4a90094-2c22-439b-9863-ca423423e75b')
-
-
 export { addNewEntry, deleteEntry, searchIt, bulkInsert };
