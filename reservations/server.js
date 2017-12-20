@@ -14,7 +14,7 @@ reservations.use(bodyParser.json());
 reservations.use(bodyParser.urlencoded({ extended: true }));
 
 reservations.post('/bookies', (req, res) => {
-  const available = Math.randon() > 0.5;
+  const available = Math.random() > 0.5;
 
-  res.send({ available });
+  res.json({ available });
 });

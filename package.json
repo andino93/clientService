@@ -8,6 +8,8 @@
     "test-server": "mocha -R spec --compilers js:babel-register spec/server.spec.js",
     "test-db": "mocha -R spec --compilers js:babel-register spec/database.spec.js",
     "test-queue": "mocha -R spec --compilers js:babel-register spec/queue.spec.js",
+    "test-reservation": "mocha -R spec --compilers js:babel-register spec/reservation.spec.js",
+    "test-dbWorker": "mocha -R spec --compilers js:babel-register spec/dbWorker.spec.js",
     "seedData": "babel-node database/seedSampleData.js"
   },
   "repository": {
