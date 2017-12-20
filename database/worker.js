@@ -3,7 +3,7 @@ import express from 'express';
 import { config } from 'dotenv';
 import Consumer from 'sqs-consumer';
 import aws from 'aws-sdk';
-import { addNewEntry, deleteEntry, searchIt, bulkInsert } from './index';
+import { addNewEntry } from './index';
 
 config();
 
