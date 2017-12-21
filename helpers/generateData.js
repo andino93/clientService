@@ -1,7 +1,7 @@
 import faker from 'faker';
 import _ from 'lodash';
 import uuid from 'uuid/v4';
-import { bulkInsert } from './index';
+import { bulkInsert } from '../database/index';
 import { cities, neighborhoods } from '../sampleNames';
 
 const getPrice = () => Math.floor(40 + (Math.random() * 150));
@@ -25,7 +25,7 @@ const fakeDates = () => {
 };
 
 // TODO: To Reservations needs guest count
-const makeSampleData = (quantity, index, type, idType) => {
+const makeSampleData = (quantity, index, type, idType, setInfo = true) => {
   const datas = [];
   for (let i = 0; i < quantity; i += 1) {
     const data = {
@@ -38,8 +38,11 @@ const makeSampleData = (quantity, index, type, idType) => {
       [idType]: uuid(),
       guestCount: randomNumber(1, 6),
     };
-    const indexInfo = { index: { _index: index, _type: type, _id: uuid() } };
-    datas.push(indexInfo);
+    let indexInfo;
+    if (setInfo) {
+      indexInfo = { index: { _index: index, _type: type, _id: uuid() } };
+      datas.push(indexInfo);
+    }
     datas.push(data);
   }
   return datas;

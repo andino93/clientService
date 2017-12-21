@@ -2,7 +2,7 @@ import { expect, assert } from 'chai';
 import { config } from 'dotenv';
 import Promise from 'bluebird';
 import { addNewEntry, deleteEntry, searchIt } from '../database/index';
-import { makeSampleData } from '../database/seedSampleData';
+import { makeSampleData } from '../helpers/generateData';
 
 describe('Database should do things', () => {
   const samples = makeSampleData(1, 'homes', 'home', 'homeId');

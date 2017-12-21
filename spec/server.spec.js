@@ -1,4 +1,4 @@
-import assert from 'assert';
+import { expect, assert } from 'chai';
 import axios from 'axios';
 import { config } from 'dotenv';
 
@@ -7,7 +7,7 @@ describe('Client Server:', () => {
     it('should respond with 200 status code', (done) => {
       axios.get(`http://localhost:${process.env.PORT}/`)
         .then((res) => {
-          assert.equal(200, res.status);
+          expect(res.status).to.equal(200);
           done();
         });
     });
