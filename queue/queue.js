@@ -17,12 +17,13 @@ sqs.receiveMessage = Promise.promisify(sqs.receiveMessage);
 sqs.deleteMessageBatch = Promise.promisify(sqs.deleteMessageBatch);
 sqs.purgeQueue = Promise.promisify(sqs.purgeQueue);
 
-const postMessage = (MessageBody, QueueUrl) => (
-  sqs.sendMessage({ MessageBody, QueueUrl })
-);
+const postMessage = (message, QueueUrl = process.env.AWS_CLIENT_URL) => {
+  const MessageBody = JSON.stringify(message);
+  return sqs.sendMessage({ MessageBody, QueueUrl });
+};
 
-const getMessages = (queueURL = process.env.AWS_CLIENT_URL) => (
-  sqs.receiveMessage({ MaxNumberOfMessages: 10, QueueUrl: queueURL })
+const getMessages = (QueueUrl = process.env.AWS_CLIENT_URL) => (
+  sqs.receiveMessage({ MaxNumberOfMessages: 10, QueueUrl })
 );
 
 const formatDelete = array => array.map(({ MessageId, ReceiptHandle }) => (

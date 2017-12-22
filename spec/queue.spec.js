@@ -1,7 +1,7 @@
 import { expect, assert } from 'chai';
 import { config } from 'dotenv';
 import Promise from 'bluebird';
-import { getMessages, postMessage, deleteMessages } from '../server/queue';
+import { getMessages, postMessage, deleteMessages } from '../queue/queue';
 
 config();
 describe('AWS Queue', () => {
@@ -24,7 +24,7 @@ describe('AWS Queue', () => {
   });
 
   describe('retrieve and delete messages from queue', () => {
-    const messages = [JSON.stringify({hello: 'test', one: 'yes'}), 'this', 'is', 'a', 'test', 'batch']
+    const messages = [{hello: 'test', one: 'yes'}, 'this', 'is', 'a', 'test', 'batch']
 
     it('expect getMessages to exist', () => {
       expect(getMessages).to.exist
@@ -34,6 +34,7 @@ describe('AWS Queue', () => {
     });
     it('should retrieve and delete from queue', (done) => {
       getMessages(testQueue)
+        .tap(resp => console.log(resp))
         .tap(response => expect(response).to.be.an('object'))
         .tap(response => expect(response).to.have.property('Messages'))
         .tap(({ Messages }) => expect(Messages).to.be.an('array'))
