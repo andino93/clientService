@@ -6,6 +6,7 @@ import reservation from '../spec/server';
 config();
 
 describe('Client Server:', () => {
+<<<<<<< HEAD
   describe('GET /rentals with Chicago query', () => {
     const query = { params: { location: 'Chicago' } };
     const results = {};
@@ -73,6 +74,19 @@ describe('Client Server:', () => {
     it('should contain detailed info for id 12345', () => {
       expect(details.id).to.equal('12345');
       expect(details.details).to.be.an('object');
+=======
+  describe('RESTful routes:', () => {
+    it('should respond with results containing Chicago', (done) => {
+      const query = { params: { city: 'Chicago' } }
+      axios.get(`http://localhost:${process.env.PORT}/rentals`, query)
+        .then((res) => {
+          expect(res.status).to.equal(200);
+          expect(res.data).to.be.an('object')
+          expect(res.data).to.have.property('rentals')
+          expect(res.data.rentals.hits).to.be.an('array')
+          done();
+        });
+>>>>>>> rebase and merge
     });
   });
 });

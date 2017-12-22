@@ -31,6 +31,7 @@ app.get('/rentals?:location', (req, res) => {
     .catch(err => res.send(err));
 });
 
+<<<<<<< HEAD
 app.get('/details?:id', (req, res) => {
   // TODO: find endpoint for inv services
   const { type, id } = req.query;
@@ -45,4 +46,12 @@ app.post('/reservations', (req, res) => {
   axios.post(`${process.env.RESERVATIONS_SERVICE}/bookies`, req.body)
     .then(response => res.json(response.data))
     .catch(err => console.error('err', err)); // eslint-disable-line
+=======
+app.post('/reservations', (req, res) => {
+  // TODO: should package up booking info and send to reservation service
+  axios.post(`${process.env.RESERVATIONS_SERVICE}/bookies`, req.body)
+    // .then(response => console.log(response.data))
+    .then(response => res.json(response.data))
+    .catch(err => console.error('err', err));
+>>>>>>> rebase and merge
 });
