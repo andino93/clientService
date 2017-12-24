@@ -29,7 +29,6 @@ app.get('/rentals?:location', (req, res) => {
 app.post('/reservations', (req, res) => {
   // TODO: should package up booking info and send to reservation service
   axios.post(`${process.env.RESERVATIONS_SERVICE}/bookies`, req.body)
-    // .then(response => console.log(response.data))
     .then(response => res.json(response.data))
     .catch(err => console.error('err', err));
 });
