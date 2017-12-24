@@ -55,6 +55,7 @@ describe('Client Server:', () => {
     it('should receive object with availability confirmation', () => {
       expect(booking).to.have.property('available');
       expect(booking.available).to.be.a('boolean');
+      expect(booking).to.have.property('reservationId');
     });
   });
 });
