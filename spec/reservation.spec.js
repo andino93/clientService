@@ -12,7 +12,7 @@ describe('Reservations Testing Server:', () => {
           expect(res.data).to.have.property('available')
           expect(res.data.available).to.exist;
           expect(res.data).to.have.property('reservationId');
-          expect(res.data.reservationId).to.exist;
+          expect(res.data.reservationId).to.be.a('string');
           done();
         })
         .catch(err => done(err));
