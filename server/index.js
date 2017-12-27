@@ -26,6 +26,12 @@ app.get('/rentals?:location', (req, res) => {
     .catch(err => res.send(err));
 });
 
+app.get('/details?:id', (req, res) => {
+  // TODO: find endpoint for inv services
+  // if experience ? ping experience service
+  // if home ? ping home service
+});
+
 app.post('/reservations', (req, res) => {
   // TODO: should package up booking info and send to reservation service
   axios.post(`${process.env.RESERVATIONS_SERVICE}/bookies`, req.body)
