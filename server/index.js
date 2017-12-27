@@ -2,6 +2,7 @@ import express from 'express';
 import { config } from 'dotenv';
 import cors from 'cors';
 import bodyParser from 'body-parser';
+import axios from 'axios';
 import { searchIt } from '../database/index';
 import addExperience from '../helpers/addExperience';
 
@@ -9,7 +10,7 @@ config();
 const app = express();
 const port = process.env.PORT;
 
-app.listen(port, () => console.log(`listening on port ${port}`));
+app.listen(port, () => console.log(`listening on port ${port}`)); // eslint-disable-line
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -27,6 +28,7 @@ app.get('/rentals?:location', (req, res) => {
 
 app.post('/reservations', (req, res) => {
   // TODO: should package up booking info and send to reservation service
-  console.log(req.body);
-  res.end();
+  axios.post(`${process.env.RESERVATIONS_SERVICE}/bookies`, req.body)
+    .then(response => res.json(response.data))
+    .catch(err => console.error('err', err)); // eslint-disable-line
 });

@@ -5,7 +5,7 @@ const addExperience = (query, isExperience, location) => {
   const withBias = { rentals: hits };
   if (isExperience) {
     return searchIt('experiences', 'experience', location)
-      .then((results) => { withBias.experience = results.hits.hits; })
+      .then((results) => { withBias.experience = results.hits; })
       .catch(() => { withBias.experience = 'null'; })
       .then(() => withBias);
   }
