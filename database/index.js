@@ -7,19 +7,19 @@ config();
 
 const client = new elasticsearch.Client({
   hosts: process.env.ELASTIC,
-  index: 'rentals',
+  // index: 'rentals',
   defer: () => Promise.defer(),
 });
 
 client.ping({ requestTimeout: 30000 })
-  .then(res => console.log('elasticity!', res))
-  .catch(err => console.error(err));
+  .then(res => console.log('elasticity!', res)) // eslint-disable-line
+  .catch(err => console.error('elasticity error! ', err)); // eslint-disable-line
 
-const addNewEntry = (location, index, body, type) => (
+const addNewEntry = (location, index, body, type, id = uuid()) => (
   client.index({
     index,
     type,
-    id: uuid(),
+    id,
     body,
   })
 );
