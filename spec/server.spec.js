@@ -7,9 +7,9 @@ config();
 
 describe('Client Server:', () => {
   describe('GET /rentals with Chicago query', () => {
-    const query = { params: { location: 'Chicago' } };
     const results = {};
     before((done) => {
+      const query = { params: { location: 'Chicago' } };
       axios.get(`http://localhost:${process.env.PORT}/rentals`, query)
         .then(({ status, data }) => {
           results.data = data;
