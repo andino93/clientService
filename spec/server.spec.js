@@ -57,17 +57,10 @@ describe('Client Server:', () => {
       expect(booking).to.have.property('reservationId');
     });
   });
-<<<<<<< HEAD
   describe('GET /details should retrieve and respond with info', () => {
     let details;
     before((done) => {
       const query = { params: { id: 12345, type: 'home' } };
-=======
-  xdescribe('GET /details should retrieve and respond with info', () => {
-    let details;
-    before((done) => {
-      const query = { params: { id: 12345 } };
->>>>>>> add route and tests for detailed info req
       axios.get(`http://localhost:${process.env.PORT}/details`, query)
         .then(( { data }) => { details = data; })
         .then(() => done())
@@ -77,14 +70,9 @@ describe('Client Server:', () => {
       expect(details).to.exist;
       expect(details).to.be.an('object');
     });
-<<<<<<< HEAD
     it('should contain detailed info for id 12345', () => {
       expect(details.id).to.equal('12345');
       expect(details.details).to.be.an('object');
-=======
-    it('should contain detailed info', () => {
-
->>>>>>> add route and tests for detailed info req
     });
   });
 });
