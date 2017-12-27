@@ -26,8 +26,14 @@ app.get('/rentals?:location', (req, res) => {
 });
 
 app.get('/details?:id', (req, res) => {
-  // TODO: find endpoint for inventory services
-  // if experience ? ping experince services
+  // TODO: find endpoint for inv services
+  const { type, id } = req.query;
+
+  axios.get(url, { params: { id } })
+    .then(({ data }) => res.json(data))
+    .tapCatch(err => console.error(err)) // eslint-disable-line
+    .catch(err => res.json(err));
+  // if experience ? ping experience service
   // if home ? ping home service
 });
 

@@ -7,9 +7,9 @@ config();
 
 describe('Client Server:', () => {
   describe('GET /rentals with Chicago query', () => {
+    const query = { params: { location: 'Chicago' } };
     const results = {};
     before((done) => {
-      const query = { params: { location: 'Chicago' } };
       axios.get(`http://localhost:${process.env.PORT}/rentals`, query)
         .then(({ status, data }) => {
           results.data = data;
@@ -48,7 +48,6 @@ describe('Client Server:', () => {
         .then(() => done())
         .catch(err => done(err));
     });
-
     it('should receive response from server', () => {
       expect(booking).to.exist;
     });
@@ -58,13 +57,12 @@ describe('Client Server:', () => {
       expect(booking).to.have.property('reservationId');
     });
   });
-
-  xdescribe('GET /details should respond with detailed info', () => {
+  xdescribe('GET /details should retrieve and respond with info', () => {
     let details;
     before((done) => {
       const query = { params: { id: 12345 } };
       axios.get(`http://localhost:${process.env.PORT}/details`, query)
-        .then(({ data }) => { details = data })
+        .then(( { data }) => { details = data; })
         .then(() => done())
         .catch(err => done(err));
     });
@@ -72,6 +70,8 @@ describe('Client Server:', () => {
       expect(details).to.exist;
       expect(details).to.be.an('object');
     });
-    it('should contain ')
-  })
+    it('should contain detailed info', () => {
+      expect(details).to
+    });
+  });
 });
