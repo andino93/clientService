@@ -1,10 +1,10 @@
 import express from 'express';
-import 'dotenv/config';
+import { config } from 'dotenv';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import uuid from 'uuid/v4';
 
-// config();
+config();
 const tester = express();
 const port = process.env.PORT3;
 
