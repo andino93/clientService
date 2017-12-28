@@ -3,7 +3,6 @@ import { config } from 'dotenv';
 config();
 
 // TODO: set env file with proper url endpoints
-
 const determineEndpoint = (type = 'test') => {
   switch (type) {
     case 'experience':
