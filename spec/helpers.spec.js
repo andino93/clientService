@@ -12,19 +12,18 @@ describe('Helper Functions', () => {
     it('addExperience should be a function', () => {
       expect(addExperience).to.be.a('function');
     });
-    xit('addExperience should add experience key with null value if passed in false', async () => {
+    it('addExperience should not add experiences key when passed false', async () => {
       const query = { hits: 'this is a test response object containing homes' };
       const addExp = await addExperience(query, false, 'Chicago');
-      expect(addExp).to.have.property('experience');
-      expect(addExp.experience).to.equal(null);
+      expect(addExp).to.not.have.property('experiences');
     });
-    xit('addExperience should add experience key with array of experince objs value if passed in true',
+    it('addExperience should add experiences key with array of experince objs value if passed in true',
       async () => {
         const query = { hits: 'this is a test response object containing homes' };
         const addExp = await addExperience(query, true, 'Chicago');
-        expect(addExp.experience).to.be.an('array');
-        expect(addExp.experience[0]).to.be.an('object')
-        expect(addExp.experience[0])
+        expect(addExp.experiences.hits).to.be.an('array');
+        expect(addExp.experiences.hits[0]).to.be.an('object');
+        expect(addExp.experiences.hits[0]._source.city).to.equal('Chicago');
     });
   });
   xdescribe('generateData should make fake data', () => {

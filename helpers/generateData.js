@@ -50,16 +50,16 @@ const makeSampleData = (quantity, index, type, idType, setInfo = true) => {
 
 const populateHomes = (quantity) => {
   bulkInsert({ body: makeSampleData(quantity, 'homes', 'home', 'homeId') })
-    .then(success => console.log(`inserted ${quantity} homes ${success}`))
-    .catch(err => console.error(`error on homes ${err}`));
+    .then(success => console.log(`inserted ${quantity} homes ${success}`)) // eslint-disable-line
+    .catch(err => console.error(`error on homes ${err}`)); // eslint-disable-line
 };
 
 // populateHomes(10000);
 
 const populateExperiences = (quantity) => {
   bulkInsert({ body: makeSampleData(quantity, 'experiences', 'experience', 'experienceId') })
-    .then(success => console.log(`inserted ${quantity} experiences ${success}`))
-    .catch(err => console.error(`error on exp ${err}`));
+    .then(success => console.log(`inserted ${quantity} experiences ${success}`)) // eslint-disable-line
+    .catch(err => console.error(`error on exp ${err}`)); // eslint-disable-line
 };
 
 populateExperiences(10000);
