@@ -11,7 +11,8 @@
     "test-queue": "mocha -R spec --compilers js:babel-register spec/queue.spec.js",
     "test-reservation": "mocha -R spec --compilers js:babel-register spec/reservation.spec.js",
     "test-dbWorker": "mocha --exit -R spec --compilers js:babel-register spec/dbWorker.spec.js",
-    "seedData": "babel-node database/seedSampleData.js"
+    "test-helpers": "mocha --exit -R spec --compilers js:babel-register spec/helpers.spec.js",
+    "seedData": "babel-node helpers/generateData.js"
   },
   "repository": {
     "type": "git",
