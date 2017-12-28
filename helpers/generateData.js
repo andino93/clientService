@@ -62,6 +62,6 @@ const populateExperiences = (quantity) => {
     .catch(err => console.error(`error on exp ${err}`));
 };
 
-// populateExperiences(10000);
+populateExperiences(10000);
 
 export { populateHomes, populateExperiences, makeSampleData };

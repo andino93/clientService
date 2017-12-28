@@ -5,17 +5,14 @@
   "main": "index.js",
   "scripts": {
     "server-dev": "nodemon --exec babel-node -- server/index.js",
-<<<<<<< HEAD
-    "test": "echo \"Error: no test specified\" && exit 1"
-=======
     "reservations": "nodemon --exec babel-node -- reservations/server.js",
     "test-server": "mocha -R spec --compilers js:babel-register spec/server.spec.js",
     "test-db": "mocha -R spec --compilers js:babel-register spec/database.spec.js",
     "test-queue": "mocha -R spec --compilers js:babel-register spec/queue.spec.js",
     "test-reservation": "mocha -R spec --compilers js:babel-register spec/reservation.spec.js",
     "test-dbWorker": "mocha --exit -R spec --compilers js:babel-register spec/dbWorker.spec.js",
-    "seedData": "babel-node database/seedSampleData.js"
->>>>>>> rebase and merge
+    "test-helpers": "mocha --exit -R spec --compilers js:babel-register spec/helpers.spec.js",
+    "seedData": "babel-node helpers/generateData.js"
   },
   "repository": {
     "type": "git",
@@ -33,10 +30,6 @@
   "dependencies": {
     "bluebird": "^3.5.1",
     "dotenv": "^4.0.0",
-<<<<<<< HEAD
-    "express": "^4.16.2",
-    "nodejs": "0.0.0"
-=======
     "elasticsearch": "^14.0.0",
     "express": "^4.16.2",
     "faker": "^4.1.0",
@@ -44,7 +37,6 @@
     "nodejs": "0.0.0",
     "sqs-consumer": "^3.8.0",
     "uuid": "^3.1.0"
->>>>>>> rebase and merge
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
@@ -67,9 +59,6 @@
   "browser": {
     "net": false,
     "tls": false
-<<<<<<< HEAD
-  }
-=======
   },
   "quokka": {
     "babel": true
@@ -77,5 +66,4 @@
   "eslintIgnore": [
     "**/*.spec.js"
   ]
->>>>>>> rebase and merge
 }
