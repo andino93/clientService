@@ -1,5 +1,6 @@
 import { expect, assert } from 'chai';
 import { config } from 'dotenv';
+import "babel-polyfill"; // for async/await compiling
 import addExperience from '../helpers/addExperience';
 import generateData from '../helpers/generateData';
 import getUrl from '../helpers/details';
@@ -11,7 +12,7 @@ describe('Helper Functions', () => {
     it('addExperience should be a function', () => {
       expect(addExperience).to.be.a('function');
     });
-    it('addExperience should add experience key with null value if passed in false', async () => {
+    xit('addExperience should add experience key with null value if passed in false', async () => {
       const query = { hits: 'this is a test response object containing homes' };
       const addExp = await addExperience(query, false, 'Chicago');
       expect(addExp).to.have.property('experience');
