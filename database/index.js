@@ -6,13 +6,13 @@ import aws from 'aws-sdk';
 
 config();
 
-const params = {
+const options = {
   accessKeyId: process.env.AWS_ACCESS_KEY_ID,
   secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
   region: process.env.AWS_DEFAULT_REGION,
 };
 
-aws.config.update(params);
+aws.config.update(options);
 
 const client = new elasticsearch.Client({
   hosts: [process.env.AWSES],
