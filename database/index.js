@@ -2,11 +2,21 @@ import { config } from 'dotenv';
 import elasticsearch from 'elasticsearch';
 import Promise from 'bluebird';
 import uuid from 'uuid/v4';
+import aws from 'aws-sdk';
 
 config();
 
+const params = {
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+  region: process.env.AWS_DEFAULT_REGION,
+};
+
+aws.config.update(params);
+
 const client = new elasticsearch.Client({
-  hosts: process.env.ELASTIC,
+  hosts: [process.env.AWSES],
+  connectionClass: require('http-aws-es'), // eslint-disable-line
   defer: () => Promise.defer(),
 });
 
