@@ -1,7 +1,6 @@
 import { expect, assert } from 'chai';
 import axios from 'axios';
 import { config } from 'dotenv';
-import reservation from '../reservations/server';
 
 config();
 
@@ -48,7 +47,6 @@ describe('Client Server:', () => {
         .then(() => done())
         .catch(err => done(err));
     });
-
     it('should receive response from server', () => {
       expect(booking).to.exist;
     });
@@ -56,6 +54,24 @@ describe('Client Server:', () => {
       expect(booking).to.have.property('available');
       expect(booking.available).to.be.a('boolean');
       expect(booking).to.have.property('reservationId');
+    });
+  });
+  describe('GET /details should retrieve and respond with info', () => {
+    let details;
+    before((done) => {
+      const query = { params: { id: 12345, type: 'home' } };
+      axios.get(`http://localhost:${process.env.PORT}/details`, query)
+        .then(({ data }) => { details = data; })
+        .then(() => done())
+        .catch(err => done(err));
+    });
+    it('should respond with data object', () => {
+      expect(details).to.exist;
+      expect(details).to.be.an('object');
+    });
+    it('should contain detailed info for id 12345', () => {
+      expect(details.id).to.equal('12345');
+      expect(details.details).to.be.an('object');
     });
   });
 });

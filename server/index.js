@@ -5,6 +5,7 @@ import bodyParser from 'body-parser';
 import axios from 'axios';
 import { searchIt } from '../database/index';
 import addExperience from '../helpers/addExperience';
+import getUrl from '../helpers/details';
 
 config();
 const app = express();
@@ -24,6 +25,15 @@ app.get('/rentals?:location', (req, res) => {
     .then(query => addExperience(query, showExperience, location))
     .then(result => res.send(result))
     .catch(err => res.send(err));
+});
+
+app.get('/details?:id', (req, res) => {
+  // TODO: find endpoint for inv services
+  const { type, id } = req.query;
+  const url = getUrl(type);
+  axios.get(url, { params: { id } })
+    .then(({ data }) => res.json(data))
+    .catch(err => console.error(err)); // eslint-disable-line
 });
 
 app.post('/reservations', (req, res) => {

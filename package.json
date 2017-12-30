@@ -5,13 +5,14 @@
   "main": "index.js",
   "scripts": {
     "server-dev": "nodemon --exec babel-node -- server/index.js",
-    "reservations": "nodemon --exec babel-node -- reservations/server.js",
+    "testServer": "nodemon --exec babel-node -- spec/server.js",
     "test-server": "mocha -R spec --compilers js:babel-register spec/server.spec.js",
     "test-db": "mocha -R spec --compilers js:babel-register spec/database.spec.js",
     "test-queue": "mocha -R spec --compilers js:babel-register spec/queue.spec.js",
-    "test-reservation": "mocha -R spec --compilers js:babel-register spec/reservation.spec.js",
+    "test-reservation": "mocha -R spec --compilers js:babel-register spec/testServer.spec.js",
     "test-dbWorker": "mocha --exit -R spec --compilers js:babel-register spec/dbWorker.spec.js",
-    "seedData": "babel-node database/seedSampleData.js"
+    "test-helpers": "mocha --exit -R spec --compilers js:babel-register spec/helpers.spec.js",
+    "seedData": "babel-node helpers/generateData.js"
   },
   "repository": {
     "type": "git",
@@ -30,6 +31,7 @@
     "aws-sdk": "^2.167.0",
     "aws-sqs-consumer": "^2.0.1",
     "axios": "^0.17.1",
+    "babel-polyfill": "^6.26.0",
     "bluebird": "^3.5.1",
     "body-parser": "^1.18.2",
     "cors": "^2.8.4",
