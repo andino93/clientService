@@ -30,12 +30,10 @@ app.get('/rentals?:location', (req, res) => {
 app.get('/details?:id', (req, res) => {
   // TODO: find endpoint for inv services
   const { type, id } = req.query;
-  // if experience ? ping experience service
-  // if home ? ping home service
-  axios.get(getUrl(type), { params: { id } })
+  const url = getUrl(type);
+  axios.get(url, { params: { id } })
     .then(({ data }) => res.json(data))
-    .tapCatch(err => console.error(err)) // eslint-disable-line
-    .catch(err => res.json(err));
+    .catch(err => console.error(err)); // eslint-disable-line
 });
 
 app.post('/reservations', (req, res) => {

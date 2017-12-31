@@ -7,7 +7,6 @@ config();
 
 const client = new elasticsearch.Client({
   hosts: process.env.ELASTIC,
-  // index: 'rentals',
   defer: () => Promise.defer(),
 });
 

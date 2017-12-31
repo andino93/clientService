@@ -1,4 +1,3 @@
-// database writing worker
 import { config } from 'dotenv';
 import Consumer from 'sqs-consumer';
 import aws from 'aws-sdk';
