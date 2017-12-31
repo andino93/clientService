@@ -15,7 +15,7 @@ const options = {
 aws.config.update(options);
 
 const client = new elasticsearch.Client({
-  hosts: [process.env.AWSES],
+  hosts: process.env.AWSES,
   connectionClass: require('http-aws-es'), // eslint-disable-line
   defer: () => Promise.defer(),
 });
