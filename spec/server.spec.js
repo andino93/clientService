@@ -59,12 +59,12 @@ describe('Client Server:', () => {
       expect(booking).to.have.property('reservationId');
     });
   });
-  describe('GET /details should retrieve and respond with info', () => {
+  xdescribe('GET /details should retrieve and respond with info', () => {
     let details;
     before((done) => {
-      const query = { params: { id: 12345, type: 'home' } };
+      const query = { params: { id: 12345 } };
       axios.get(`http://localhost:${process.env.PORT}/details`, query)
-        .then(({ data }) => { details = data; })
+        .then(( { data }) => { details = data; })
         .then(() => done())
         .catch(err => done(err));
     });
