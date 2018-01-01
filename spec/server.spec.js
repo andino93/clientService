@@ -56,7 +56,7 @@ describe('Client Server:', () => {
       expect(booking).to.have.property('reservationId');
     });
   });
-  xdescribe('GET /details should retrieve and respond with info', () => {
+  describe('GET /details should retrieve and respond with info', () => {
     let details;
     before((done) => {
       const query = { params: { id: 12345 } };
