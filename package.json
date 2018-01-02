@@ -9,7 +9,7 @@
     "test-server": "mocha -R spec --compilers js:babel-register spec/server.spec.js",
     "test-db": "mocha -R spec --compilers js:babel-register spec/database.spec.js",
     "test-queue": "mocha -R spec --compilers js:babel-register spec/queue.spec.js",
-    "test-reservation": "mocha -R spec --compilers js:babel-register spec/testServer.spec.js",
+    "test-testServer": "mocha -R spec --compilers js:babel-register spec/testServer.spec.js",
     "test-dbWorker": "mocha --exit -R spec --compilers js:babel-register spec/dbWorker.spec.js",
     "test-helpers": "mocha --exit -R spec --compilers js:babel-register spec/helpers.spec.js",
     "seedData": "babel-node helpers/generateData.js"
