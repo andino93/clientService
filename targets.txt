@@ -1,0 +1,3 @@
+GET http://localhost:3068/rentals?location=Chicago
+
+GET http://localhost:3068/details?type=home&id=12345
