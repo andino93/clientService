@@ -41,3 +41,4 @@ Thumbs.db
 .env
 config.js
 node_modules/
+vegeta/

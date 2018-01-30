@@ -1,6 +1,7 @@
 import { expect, assert } from 'chai';
 import axios from 'axios';
 import { config } from 'dotenv';
+import reservation from '../spec/server';
 
 config();
 
@@ -20,7 +21,7 @@ describe('Client Server:', () => {
     it('should get response with 200 status code', () => {
       expect(results.status).to.equal(200);
     });
-    it('reponse data should be an object', () => {
+    it('response data should be an object', () => {
       expect(results.data).to.be.an('object');
     });
     it('data should have key called rentals', () => {
@@ -61,7 +62,7 @@ describe('Client Server:', () => {
     before((done) => {
       const query = { params: { id: 12345, type: 'home' } };
       axios.get(`http://localhost:${process.env.PORT}/details`, query)
-        .then(({ data }) => { details = data; })
+        .then(( { data }) => { details = data; })
         .then(() => done())
         .catch(err => done(err));
     });

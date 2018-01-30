@@ -62,6 +62,6 @@ const populateExperiences = quantity => (
     .tapCatch(err => console.error(`error on exp ${err}`)) // eslint-disable-line
 );
 
-// populateExperiences(10000);
+populateExperiences(10000);
 
 export { populateHomes, populateExperiences, makeSampleData };
